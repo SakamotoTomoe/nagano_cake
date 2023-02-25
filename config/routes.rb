@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     get 'homes/top'
   end
   namespace :admin do
-    get 'genres/index' => 'genres#index'
+    get 'genres' => 'genres#index'
     get 'genres/edit'
     post 'genres' => 'genres#create'
   end
