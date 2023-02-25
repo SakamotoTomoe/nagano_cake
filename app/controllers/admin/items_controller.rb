@@ -1,5 +1,9 @@
 class Admin::ItemsController < ApplicationController
   def new
+    @item = Item.new
+  end
+  
+  def create
   end
 
   def index
@@ -9,5 +13,11 @@ class Admin::ItemsController < ApplicationController
   end
 
   def edit
+  end
+  
+  private
+
+  def post_image_params
+    params.require(:items).permit(:image)
   end
 end
