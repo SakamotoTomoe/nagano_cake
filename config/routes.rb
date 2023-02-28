@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :items, only: [:new, :index, :show, :edit]
+    resources :items, only: [:new, :index, :show, :edit, :create, :update]
   end
   namespace :admin do
     get 'sessions/new'
