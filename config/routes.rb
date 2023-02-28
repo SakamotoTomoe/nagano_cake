@@ -3,9 +3,7 @@ Rails.application.routes.draw do
     get 'orders/show'
   end
   namespace :admin do
-    get 'customers/index'
-    get 'customers/show'
-    get 'customers/edit'
+    resources :customers, only: [:index, :show, :edit]
   end
   namespace :admin do
     get 'homes/top'
