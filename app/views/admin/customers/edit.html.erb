@@ -1,2 +1,19 @@
-<h1>Admin::Customers#edit</h1>
-<p>Find me in app/views/admin/customers/edit.html.erb</p>
+<h1><%= @customer.last_name %><%= @customer.first_name %> さんの会員情報編集</h1>
+
+<%= form_with model: @customer , url: admin_customer_path(@customer.id) do |f| %>
+  会員ID　<%= f.text_field :id %><br>
+  氏名  <%= f.text_field :last_name ,:first_name %><br>
+  フリガナ <%= f.text_field :last_name_kana ,:first_name_kana %><br>
+  郵便番号 <%= f.text_field :postal_code %><br>
+  住所 <%= f.text_field :adress %><br>
+  電話番号 <%= f.text_field :telephone_number %><br>
+  メールアドレス <%= f.text_field :mail %><br>
+  会員ステータス
+  <%= f.radio_button :is_deleted, true %>
+  <%= f.label :is_deleted, '有効', value: true %>
+  <%= f.radio_button :is_deleted, false %>
+  <%= f.label :is_deleted, '退会', value: false %>
+  <%#= f.text_field :is_deleted %><br>
+  <%= f.submit '変更を保存' %>
+<% end %>
+

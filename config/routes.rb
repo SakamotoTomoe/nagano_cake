@@ -3,10 +3,10 @@ Rails.application.routes.draw do
     get 'orders/show'
   end
   namespace :admin do
-    resources :customers, only: [:index, :show, :edit]
+    resources :customers, only: [:index, :show, :edit, :update]
   end
   namespace :admin do
-    get 'homes/top'
+    root to: "homes#top"
   end
   namespace :admin do
     resources :genres, only: [:index, :edit, :create, :update]
