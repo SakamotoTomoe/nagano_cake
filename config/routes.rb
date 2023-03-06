@@ -19,10 +19,10 @@ Rails.application.routes.draw do
     get 'items/index'
     get 'items/show'
   end
-  namespace :public do
+
     root to: "homes#top"
-    get 'homes/about'
-  end
+    get '/about' => 'homes#about'
+
   namespace :admin do
     get 'orders/show'
   end
