@@ -1,0 +1,8 @@
+<strong>本当に退会しますか？</strong>
+<p>退会すると、会員登録情報や</p>
+<p>これまでの購入履歴が閲覧できなくなります。</p>
+<p>退会する場合は、「退会する」をクリックしてください。</p>
+<%= form_with model: @customer, url: customers_my_page_cancel(@customer.id) do |f| %>
+  <%= link_to '退会しない', customers_my_page_path(@customer.id) %>
+  <%= f.submit '退会する' %>
+<% end %>

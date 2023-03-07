@@ -1,27 +1,34 @@
 Rails.application.routes.draw do
-  namespace :public do
-    get 'address/index'
-    get 'address/edit'
+
+  scope module: :public do
+    resources :address, only: [:index, :edit]
   end
-  namespace :public do
-    get 'orders/new'
-    get 'orders/index'
-    get 'orders/show'
+
+  scope module: :public do
+    resources :orders, only: [:new, :index, :show]
   end
+
   namespace :public do
     get 'cart_items/index'
   end
-  namespace :public do
-    get 'customers/show'
-    get 'customers/edit'
+
+  scope module: :public do
+    get 'customers/my_page' => 'customers#show'
+    get 'customers/my_page/edit' => 'customers#edit'
+    patch 'customers/my_page' => 'customers#update'
+    get 'customers/confirm' => 'customers#confirm'
+    patch 'customers/my_page/cancel' => 'customers#cancel'
   end
+
   namespace :public do
     get 'items/index'
     get 'items/show'
   end
 
+  scope module: :public do
     root to: "homes#top"
     get '/about' => 'homes#about'
+  end
 
   namespace :admin do
     get 'orders/show'
