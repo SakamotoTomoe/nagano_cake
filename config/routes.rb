@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
 
   scope module: :public do
-    resources :address, only: [:index, :edit]
+    resources :address, only: [:index, :edit, :create, :update, :destroy]
   end
 
   scope module: :public do
     resources :orders, only: [:new, :index, :show]
   end
 
-  namespace :public do
-    get 'cart_items/index'
+  scope module: :public do
+    resources :cart_items, only: [:index, :update, :destroy, :create]
+    delete 'cart_items' => 'cart_items#all_destroy'
   end
 
   scope module: :public do
@@ -20,9 +21,8 @@ Rails.application.routes.draw do
     patch 'customers/my_page/cancel' => 'customers#cancel'
   end
 
-  namespace :public do
-    get 'items/index'
-    get 'items/show'
+  scope module: :public do
+    resources :items, only: [:index, :show]
   end
 
   scope module: :public do

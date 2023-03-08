@@ -1,6 +1,6 @@
 <h1>会員情報編集</h1>
 
-<%= form_with model: @customers , url: customers_my_page_edit_path(@customers.id) do |f| %>
+<%= form_with model: @customer , url: customers_my_page_edit_path(current_customer.id) do |f| %>
   氏名  <%= f.text_field :last_name ,:first_name %><br>
   フリガナ <%= f.text_field :last_name_kana ,:first_name_kana %><br>
   郵便番号 <%= f.text_field :postal_code %><br>
