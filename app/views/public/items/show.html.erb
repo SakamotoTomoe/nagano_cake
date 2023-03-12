@@ -1,7 +1,7 @@
 <%= image_tag @item.get_image(300,300) %>
 <h1><%= @item.name %></h1>
 <%= @item.introduction %>
-￥<%= @item.price + (@item.price/10) %>（税込）
+<%= number_to_currency(@item.price * 1.10 , unit: "￥", strip_insignificant_zeros: true) %>（税込）
 <%= form_with model: @cart_items, url: cart_items_path , method: :post do |f| %>
   <%= f.select :amount, ['1', '2', '3'], {include_blank: '個数選択'} %>
   <%= f.hidden_field :customer_id, value: current_customer.id %>

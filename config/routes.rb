@@ -6,11 +6,13 @@ Rails.application.routes.draw do
 
   scope module: :public do
     resources :orders, only: [:new, :index, :show]
+    post 'orders/confirm' => 'orders#confirm', as: :orders_confirm
+    get 'orders/complete' => 'orders#complete', as: :orders_complete
   end
 
   scope module: :public do
     resources :cart_items, only: [:index, :update, :destroy, :create]
-    delete 'cart_items' => 'cart_items#all_destroy'
+    delete 'cart_items' => 'cart_items#all_destroy', as: :cart_items_all_destroy
   end
 
   scope module: :public do
