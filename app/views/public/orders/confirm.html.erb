@@ -11,10 +11,10 @@
   <tbody>
     <% @cart_items.each do |cart_item| %>
     <tr>
-      <td><%= image_tag cart_item.get_image(100,100) %><%= cart_item.name %></td>
-      <td><%= number_to_currency(cart_item.price * 1.10, unit: "￥", strip_insignificant_zeros: true) %></td>
+      <td><%= image_tag cart_item.item.get_image(100,100) %><%= cart_item.item.name %></td>
+      <td><%= number_to_currency(cart_item.item.price * 1.10, unit: "￥", strip_insignificant_zeros: true) %></td>
       <td><%= cart_item.amount %></td>
-      <td><%= number_to_currency(cart_item.price * 1.10 * cart_item.amount , unit: "￥", strip_insignificant_zeros: true) %></td>
+      <td><%= number_to_currency(cart_item.item.price * 1.10 * cart_item.amount , unit: "￥", strip_insignificant_zeros: true) %></td>
     </tr>
     <% end %>
   </tbody>
@@ -35,17 +35,16 @@
         <% @total = @total + cart_item.subtotal %>
       <% end %>
       <td><%= number_to_currency(@total , unit: "￥", strip_insignificant_zeros: true) %></td>
-      <td>
-        <%= @total_payment %>
-      </td>
+      <td><%= number_to_currency(@total + @order.shipping_cost , unit: "￥", strip_insignificant_zeros: true) %></td>
     </tr>
   </tbody>
 </table>
 
 <strong>支払方法</strong>
-<%= @order.payment_method %><br>
+<%= @order.payment_method_i18n %><br>
 <strong>お届け先</strong>
-<%= @order.address %><br>
+〒<%= @order.postal_code %><%= @order.address %><br>
+<%= @order.name %><br>
 
 <%= form_with model: @order , url: orders_path , method: :post do |f| %>
   <%= f.submit '注文を確定する' %>
