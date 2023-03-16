@@ -3,12 +3,6 @@ class Public::OrdersController < ApplicationController
     @order = Order.new
   end
 
-  def index
-  end
-
-  def show
-  end
-
   def confirm
     @order = Order.new(orders_params)
     if params[:order][:select_address] == "0"
@@ -29,12 +23,20 @@ class Public::OrdersController < ApplicationController
     @order.shipping_cost = 800
     @cart_items = current_customer.cart_items
     @total = 0
+    @order.total_payment = @total + @order.shipping_cost
   end
 
   def create
     order = Order.new(orders_params)
     order.save
     redirect_to orders_complete_path
+  end
+
+  def index
+    @orders = current_customer.orders
+  end
+
+  def show
   end
 
   private
