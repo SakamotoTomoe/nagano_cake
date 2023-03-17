@@ -1,32 +1,51 @@
-<h1>配送先登録/一覧</h1>
-<%= form_with model: @address, url: address_index_path do |f| %>
-  郵便番号（ハイフンなし）
-  <%= f.text_field :postal_code %><br>
-  住所
-  <%= f.text_field :address %><br>
-  宛名
-  <%= f.text_field :name %><br>
-  <%= f.submit '新規登録' %>
-<% end %>
-
-<table>
-  <thead>
-    <tr>
-      <th>郵便番号</th>
-      <th>住所</th>
-      <th>宛名</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @addresses.each do |address| %>
-    <tr>
-      <td><%= address.postal_code %></td>
-      <td><%= address.address %></td>
-      <td><%= address.name %></td>
-      <td><%= link_to '編集する', edit_address_path(current_customer.id) %></td>
-      <td><%= link_to '削除する', address_path(current_customer.id) ,method: :delete ,"data-confirm"=>"本当に消しますか？" %></td>
-    </tr>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+    <h1>配送先登録/一覧</h1>
+    <%= form_with model: @address, url: address_index_path do |f| %>
+      <table>
+        <tr>
+          <th>郵便番号（ハイフンなし）</th><td><%= f.text_field :postal_code %></td>
+        </tr>
+        <tr>
+          <th>住所</th><td><%= f.text_field :address %></td>
+        </tr>
+        <tr>
+          <th>宛名</th><td><%= f.text_field :name %></td>
+        </tr>
+        <tr>
+          <th></th><td><%= f.submit '新規登録', class:'btn btn-sm btn-success' %></td>
+        </tr>
+      </table>
     <% end %>
-  </tbody>
-</table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8">
+    <table class="table table-bordered">
+      <thead class="table-primary">
+        <tr>
+          <th>郵便番号</th>
+          <th>住所</th>
+          <th>宛名</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @addresses.each do |address| %>
+        <tr>
+          <td><%= address.postal_code %></td>
+          <td><%= address.address %></td>
+          <td><%= address.name %></td>
+          <td>
+            <%= link_to '編集する', edit_address_path(current_customer.id), class:'btn btn-sm btn-success' %>
+            <%= link_to '削除する', address_path(current_customer.id) ,method: :delete , class:'btn btn-sm btn-danger', "data-confirm"=>"本当に消しますか？" %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
