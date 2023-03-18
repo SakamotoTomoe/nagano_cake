@@ -36,16 +36,16 @@
               </li>
             <% else %>
               <li class="nav-item">
-                <%= link_to 'About', about_path %>
+                <%= link_to 'About', about_path , class: 'nav-link text-dark' %>
               </li>
               <li class="nav-item">
-                <%= link_to '商品一覧', items_path %>
+                <%= link_to '商品一覧', items_path , class: 'nav-link text-dark' %>
               </li>
               <li class="nav-item">
-                <%= link_to '新規登録', new_customer_registration_path %>
+                <%= link_to '新規登録', new_customer_registration_path , class: 'nav-link text-dark' %>
               </li>
               <li class="nav-item">
-                <%= link_to 'ログイン', new_customer_session_path %>
+                <%= link_to 'ログイン', new_customer_session_path , class: 'nav-link text-dark' %>
               </li>
             <% end %>
             </ul>
@@ -58,6 +58,8 @@
     <footer class="shadow-sm">
       <div class="container">
         <div class="row no-gutters">
+          <div style="height: 100px;">
+          </div>
         </div>
       </div>
     </footer>

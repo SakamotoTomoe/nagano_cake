@@ -6,6 +6,12 @@ class Public::CartItemsController < ApplicationController
 
   def create
     cart_items = CartItem.new(cart_items_params)
+    cart_items = Item.find_by(name: "ショートケーキ")
+    if cart_items.name == "ショートケーキ"
+      cart_items.amount + cart_item.amount
+    else
+      CartItem.new(cart_items_params)
+    end
     cart_items.save
     redirect_to cart_items_path
   end
