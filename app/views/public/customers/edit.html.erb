@@ -1,15 +1,33 @@
-<h1>会員情報編集</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h1>会員情報編集</h1>
+      <%= form_with model: @customer , url: customers_update_path, method: :patch do |f| %>
+      <table>
+        <tr>
+          <th>氏名</th><td><%= f.text_field :last_name %><%= f.text_field :first_name %></td>
+        </tr>
+        <tr>
+          <th>フリガナ</th><td><%= f.text_field :last_name_kana %><%= f.text_field :first_name_kana %></td>
+        </tr>
+        <tr>
+          <th>郵便番号</th><td><%= f.text_field :postal_code %></td>
+        </tr>
+        <tr>
+          <th>住所</th><td><%= f.text_field :adress %></td>
+        </tr>
+        <tr>
+          <th>電話番号</th><td><%= f.text_field :telephone_number %></td>
+        </tr>
+        <tr>
+          <th>メールアドレス</th><td><%= f.text_field :email %></td>
+        </tr>
+      </table>
+        <%= f.submit '編集内容を保存', class:'btn btn-sm btn-success' %>
+        <%= link_to '退会する', customers_confirm_path , class:'btn btn-sm btn-danger' %>
+      <% end %>
 
-<%= form_with model: @customer , url: customers_my_page_edit_path(current_customer.id) do |f| %>
-  氏名  <%= f.text_field :last_name %><%= f.text_field :first_name %><br>
-  フリガナ <%= f.text_field :last_name_kana %><%= f.text_field :first_name_kana %><br>
-  郵便番号 <%= f.text_field :postal_code %><br>
-  住所 <%= f.text_field :adress %><br>
-  電話番号 <%= f.text_field :telephone_number %><br>
-  メールアドレス <%= f.text_field :email %><br>
-
-  <%= f.submit '編集内容を保存' %>
-  <%= link_to '退会する', customers_confirm_path %>
-<% end %>
-
+    </div>
+  </div>
+</div>
 

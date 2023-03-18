@@ -17,18 +17,26 @@
       </table>
     </div>
 
-    <div class="col-md-10">
+    <div class="col-md-10 ">
+      <div class="mx-auto" style="width: 400px;">
       <P>ようこそ、ながのCAKEへ！</P>
       <P>このサイトは、ケーキ販売のECサイトになります。</P>
       <p>会員でない方も商品の閲覧はできますが、</p>
       <p>購入には会員登録が必要になります。</p>
+      </div>
 
       <h1>新着商品</h1><br>
-      <% @items.each do |item| %>
-        <%= image_tag item.get_image(200,200) %><br>
-        <%= item.name %><br>
-        <%= number_to_currency(item.price, unit: "￥", strip_insignificant_zeros: true) %><br>
-      <% end %>
+      <div style="display: flex; margin: 20px;">
+          <% @items.each do |item| %>
+            <div>
+            <%= image_tag item.get_image(200,200) %><br>
+            <%= link_to item.name , item_path(item.id) %><br>
+            <%= number_to_currency(item.price, unit: "￥", strip_insignificant_zeros: true) %><br>
+            </div>
+          <% end %>
+      </div>
+
+      <%= link_to '全ての商品を見る＞', items_path %>
     </div>
   </div>
 </div>
