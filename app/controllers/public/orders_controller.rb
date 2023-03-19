@@ -28,7 +28,10 @@ class Public::OrdersController < ApplicationController
 
   def create
     order = Order.new(orders_params)
+    order.customer_id = current_customer.id
     order.save
+    order.order_details.save
+    current_customer.cart_items.destroy_all
     redirect_to orders_complete_path
   end
 
@@ -40,11 +43,12 @@ class Public::OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order.shipping_cost = 800
     @total = @order.total_payment - 800
+    @order_details = Order.order_details
   end
 
   private
 
   def orders_params
-    params.require(:order).permit(:postal_code, :address, :name, :total_payment, :payment_method, :status, :customer_id)
+    params.require(:order).permit(:postal_code, :address, :name, :total_payment, :payment_method, :shipping_cost)
   end
 end
