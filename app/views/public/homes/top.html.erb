@@ -1,0 +1,44 @@
+<div class="container" style="margin: 30px;">
+  <div class="row no-gutters">
+    <div class="col-md-2">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ジャンル検索</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @genres.each do |genre| %>
+          <tr>
+            <td><%= genre.name %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-10" style="padding: 20px;">
+      <div class="mx-auto" style="width: 400px; margin: 50px;">
+      <P>ようこそ、ながのCAKEへ！</P>
+      <P>このサイトは、ケーキ販売のECサイトになります。</P>
+      <p>会員でない方も商品の閲覧はできますが、</p>
+      <p>購入には会員登録が必要になります。</p>
+      </div>
+
+      <h2>新着商品</h2><br>
+      <div style="display: flex;">
+          <% @items.each do |item| %>
+            <div style="margin: 20px;">
+            <%= image_tag item.get_image(200,200) %><br>
+            <%= link_to item.name , item_path(item.id) , class: 'text-dark' %><br>
+            <%= number_to_currency(item.price, unit: "￥", strip_insignificant_zeros: true) %><br>
+            </div>
+          <% end %>
+      </div>
+      <div class="pull-left">
+        <%= link_to '全ての商品を見る＞', items_path , class: 'text-dark'%>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,22 @@
+<div class="container" style="margin: 30px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <%= image_tag @item.get_image(300,300) %>
+    </div>
+    <div class="col-md-8">
+      <h1><%= @item.name %></h1>
+      <%= @item.introduction %><br>
+      <div  style="padding: 10px;">
+      <strong><%= number_to_currency(@item.price * 1.10 , unit: "￥", strip_insignificant_zeros: true) %></strong>（税込）
+      </div>
+      <%= form_with model: @cart_items, url: cart_items_path , method: :post do |f| %>
+        <div  style="padding: 10px;">
+        <%= f.select :amount, ['1', '2', '3'], {include_blank: '個数選択'} %>
+        <%= f.hidden_field :customer_id, value: current_customer %>
+        <%= f.hidden_field :item_id, value: @item.id %>
+        <%= f.submit 'カートに入れる', class:'btn btn-sm btn-success' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

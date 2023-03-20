@@ -1,0 +1,73 @@
+<div class="container" style="margin: 30px;">
+  <div class="row no-gutters">
+    <div class="col-md-10">
+      <h1>注文情報確認</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <table class="table table-bordered">
+        <thead class="table-primary">
+          <tr>
+            <th>商品名</th>
+            <th>単価（税込）</th>
+            <th>数量</th>
+            <th>小計</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @cart_items.each do |cart_item| %>
+          <tr>
+            <td><%= image_tag cart_item.item.get_image(100,100) %><%= cart_item.item.name %></td>
+            <td><%= number_to_currency(cart_item.item.price * 1.10, unit: "￥", strip_insignificant_zeros: true) %></td>
+            <td><%= cart_item.amount %></td>
+            <td><%= number_to_currency(cart_item.item.price * 1.10 * cart_item.amount , unit: "￥", strip_insignificant_zeros: true) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <table class="table table-bordered">
+          <tr>
+            <th class="table-primary">送料</th><td><%= number_to_currency(@order.shipping_cost, unit: "￥", strip_insignificant_zeros: true) %></td>
+          </tr>
+          <tr>
+            <% @cart_items.each do |cart_item| %>
+              <% @total = @total + cart_item.subtotal %>
+            <% end %>
+            <% @order.total_payment = @order.total_payment + @total %>
+            <th class="table-primary">商品合計</th><td><%= number_to_currency(@total , unit: "￥", strip_insignificant_zeros: true) %></td>
+          </tr>
+          <tr>
+            <th class="table-primary">請求金額</th><td><%= number_to_currency(@order.total_payment , unit: "￥", strip_insignificant_zeros: true) %></td>
+          </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" style="margin: 30px;">
+      <table  width="300px" height="200px">
+        <tr>
+          <th>支払方法</th><td><%= @order.payment_method_i18n %></td>
+        </tr>
+        <tr>
+          <th>お届け先</th><td>〒<%= @order.postal_code %> <%= @order.address %><br><%= @order.name %></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-12" style="margin: 30px;">
+      <%= form_with model: @order , url: orders_path , method: :post do |f| %>
+        <%= f.hidden_field :shipping_cost, value: @order.shipping_cost %>
+        <%= f.hidden_field :total_payment, value: @order.total_payment %>
+        <%= f.hidden_field :payment_method, value: @order.payment_method %>
+        <%= f.hidden_field :postal_code, value: @order.postal_code %>
+        <%= f.hidden_field :address, value: @order.address %>
+        <%= f.hidden_field :name, value: @order.name %>
+        <div class="mx-auto" style="width: 400px;">
+        <%= f.submit '注文を確定する', class:'btn btn-sm btn-success' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

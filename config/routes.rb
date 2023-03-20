@@ -1,4 +1,37 @@
 Rails.application.routes.draw do
+
+  scope module: :public do
+    resources :address, only: [:index, :edit, :create, :update, :destroy]
+  end
+
+  scope module: :public do
+    get 'orders/complete' => 'orders#complete', as: :orders_complete
+    resources :orders, only: [:new, :index, :show, :create]
+    post 'orders/confirm' => 'orders#confirm', as: :orders_confirm
+  end
+
+  scope module: :public do
+    resources :cart_items, only: [:index, :update, :destroy, :create]
+    delete 'cart_items' => 'cart_items#all_destroy', as: :cart_items_all_destroy
+  end
+
+  scope module: :public do
+    get 'customers/my_page' => 'customers#show'
+    get 'customers/my_page/edit' => 'customers#edit'
+    patch 'customers/my_page' => 'customers#update', as: :customers_update
+    get 'customers/confirm' => 'customers#confirm'
+    patch 'customers/my_page/cancel' => 'customers#cancel'
+  end
+
+  scope module: :public do
+    resources :items, only: [:index, :show]
+  end
+
+  scope module: :public do
+    root to: "homes#top"
+    get '/about' => 'homes#about'
+  end
+
   namespace :admin do
     get 'orders/show'
   end
