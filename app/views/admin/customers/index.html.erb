@@ -1,21 +1,35 @@
-<h1>会員一覧</h1>
-<table>
-  <thead>
-    <tr>
-      <th>会員ID</th>
-      <th>氏名</th>
-      <th>メールアドレス</th>
-      <th>ステータス</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= @customers.each do |customer| %>
-    <tr>
-      <td><%= customer.id %></td>
-      <td><%= customer.last_name %><%= customer.first_name %></td>
-      <td><%= customer.email %></td>
-      <td><%= customer.is_deleted %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="container" style="margin: 30px;">
+  <div class="row no-gutters">
+    <div class="col-md-10">
+      <h1>会員一覧</h1>
+      <table class="table table-bordered">
+        <thead class="table-primary">
+          <tr>
+            <th>会員ID</th>
+            <th>氏名</th>
+            <th>メールアドレス</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @customers.each do |customer| %>
+          <tr>
+            <td><%= customer.id %></td>
+            <td>
+              <%= link_to customer.last_name + customer.first_name , admin_customer_path(customer.id) %>
+            </td>
+            <td><%= customer.email %></td>
+            <td>
+            <% if customer.is_deleted == false %>
+              <p class="text-secondary">退会</p>
+            <% else %>
+              <strong class="text-success">有効</strong>
+            <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

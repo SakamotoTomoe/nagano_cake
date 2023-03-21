@@ -1,13 +1,46 @@
-<h1><%= @customer.last_name %><%= @customer.first_name %> さんの会員詳細 </h1>
-
-会員ID　<%= @customer.id %><br>
-氏名  <%= @customer.last_name %><%= @customer.first_name %><br>
-フリガナ <%= @customer.last_name_kana %><%= @customer.first_name_kana %><br>
-郵便番号 <%= @customer.postal_code %><br>
-住所 <%= @customer.adress %><br>
-電話番号 <%= @customer.telephone_number %><br>
-メールアドレス <%= @customer.mail %><br>
-会員ステータス <%= @customer.is_deleted %><br>
-
-<%= link_to '編集する' , edit_admin_customer_path(@customer.id) %>
-<%= link_to '注文履歴一覧を見る' , admin_orders_show_path(@customer.id) %>
+<div class="container" style="margin: 30px;">
+  <div class="row no-gutters">
+    <div class="col-md-6">
+      <h1><%= @customer.last_name %><%= @customer.first_name %> さんの会員詳細 </h1>
+      <table class="table table-light">
+        <tr>
+          <th>会員ID</th><td><%= @customer.id %></td>
+        </tr>
+        <tr>
+          <th>氏名</th><td><%= @customer.last_name %><%= @customer.first_name %></td>
+        </tr>
+        <tr>
+          <th>フリガナ</th><td><%= @customer.last_name_kana %><%= @customer.first_name_kana %></td>
+        </tr>
+        <tr>
+          <th>郵便番号</th><td><%= @customer.postal_code %></td>
+        </tr>
+        <tr>
+          <th>住所</th><td><%= @customer.address %></td>
+        </tr>
+        <tr>
+          <th>電話番号</th><td><%= @customer.telephone_number %></td>
+        </tr>
+        <tr>
+          <th>メールアドレス</th><td><%= @customer.email %></td>
+        </tr>
+        <tr>
+          <th>会員ステータス</th>
+          <td>
+            <% if @customer.is_deleted == false %>
+              <p class="text-secondary">退会</p>
+            <% else %>
+              <strong class="text-success">有効</strong>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <%= link_to '編集する' , edit_admin_customer_path(@customer.id), class:'btn btn-sm btn-success' %>
+      <%= link_to '注文履歴一覧を見る' , admin_orders_show_path(@customer.id), class:'btn btn-sm btn-primary' %>
+    </div>
+  </div>
+</div>
