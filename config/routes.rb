@@ -33,7 +33,11 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    get 'orders/show'
+    resources :orders, only: [:show]
+    patch 'orders/:id' => 'orders#status', as: :orders_status
+  end
+  namespace :admin do
+    patch 'order_details/:id' => 'order_details#production', as: :order_details_production
   end
   namespace :admin do
     resources :customers, only: [:index, :show, :edit, :update]

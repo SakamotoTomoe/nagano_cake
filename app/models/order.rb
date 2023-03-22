@@ -9,5 +9,13 @@ class Order < ApplicationRecord
   def subtotal
     item.price * 1.10 * cart_item.amount
   end
+  
+  def order_item_amount
+    amount = 0
+    order_details.each do |order_detail|
+      amount = amount + order_detail.amount
+    end
+    return amount
+  end
 
 end
