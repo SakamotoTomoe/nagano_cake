@@ -47,10 +47,9 @@
             <td><%= number_with_precision(order_detail.price * 1.10 , strip_insignificant_zeros: true) %></td>
             <td><%= order_detail.amount %></td>
             <td><%= number_with_precision(order_detail.price * 1.10 * order_detail.amount , strip_insignificant_zeros: true) %></td>
-            <td><%= order_detail.making_status %></td>
             <td>
               <%= form_with model: order_detail , url:  admin_order_details_production_path(order_detail.id), method: :patch do |f| %>
-                <%= f.select :making_status, Order_detail.making_statuses.keys.map { |k| [Order_detail.making_statuses_i18n[k], k] } %>
+                <%= f.select :making_status, OrderDetail.making_statuses.keys.map { |k| [OrderDetail.making_statuses_i18n[k], k] } %>
                 <%= f.submit '更新', class:'btn btn-sm btn-success' %>
               <% end %>
             </td>
