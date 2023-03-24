@@ -8,12 +8,18 @@ class Public::CustomersController < ApplicationController
 
   def update
     customer = current_customer
-    customer.save
-    redirect_to
+    customer.update(customer_params)
+    redirect_to customers_my_page_path
   end
 
   def confirm
     @customer = current_customer
+  end
+
+  def cancel
+    customer = current_customer.is_deleted
+    customer = true
+    redirect_to root_path
   end
 
   private

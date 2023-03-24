@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="margin: 30px;">
   <div class="row">
     <div class="col-md-12">
       <strong>本当に退会しますか？</strong>
@@ -7,7 +7,7 @@
       <p>退会する場合は、「退会する」をクリックしてください。</p>
       <%= form_with model: @customer, url: customers_my_page_cancel_path , method: :patch do |f| %>
         <%= link_to '退会しない', customers_my_page_path , class:'btn btn-sm btn-primary' %>
-        <%= f.submit '退会する', class:'btn btn-sm btn-danger' %>
+        <%= f.submit '退会する', class:'btn btn-sm btn-danger', "data-confirm" => "本当に退会しますか？" %>
       <% end %>
     </div>
   </div>

@@ -53,14 +53,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
           <% @order_details.each do |order_detail| %>
+          <tr>
             <td><%= order_detail.item.name %></td>
-            <td><%= order_detail.price * 1.10 %></td>
+            <td><%= number_with_precision(order_detail.price * 1.10 , strip_insignificant_zeros: true) %></td>
             <td><%= order_detail.amount %></td>
-            <td><%= order_detail.price * 1.10 * order_detail.amount %></td>
-          <% end %>
+            <td><%= number_with_precision(order_detail.price * 1.10 * order_detail.amount , strip_insignificant_zeros: true) %></td>
           </tr>
+          <% end %>
         </tbody>
       </table>
     </div>
