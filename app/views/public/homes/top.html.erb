@@ -27,7 +27,7 @@
 
       <h2>新着商品</h2><br>
       <div style="display: flex;">
-          <% @items.each do |item| %>
+          <% @items.first(4).each do |item| %>
             <div style="margin: 20px;">
             <%= image_tag item.get_image(200,200) %><br>
             <%= link_to item.name , item_path(item.id) , class: 'text-dark' %><br>

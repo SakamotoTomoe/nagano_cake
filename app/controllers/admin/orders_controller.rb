@@ -9,12 +9,14 @@ class Admin::OrdersController < ApplicationController
   def status
     order = Order.find(params[:id])
     order.update(order_params)
-    #if status == 1
-      #order.order_details.making_status = 1
-      #redirect_to admin_order_path(order.id)
-    #else
+    if order.status == "confirm_payment"
+      order.order_details.each do |order_detail|
+        order_detail.update(making_status: "waiting" )
+      end
+      redirect_to admin_order_path(order.id)
+    else
     redirect_to admin_order_path(order.id)
-    #end
+    end
   end
 
   private

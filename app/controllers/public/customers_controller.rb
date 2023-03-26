@@ -17,8 +17,9 @@ class Public::CustomersController < ApplicationController
   end
 
   def cancel
-    customer = current_customer.is_deleted
-    customer = true
+
+    current_customer.update(is_deleted: true)
+    sign_out current_customer
     redirect_to root_path
   end
 
